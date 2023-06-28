@@ -1,0 +1,11 @@
+.createTodo-main {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-main {
+  /* border: 2px solid red; */
+  margin-right: 10px;
+}
