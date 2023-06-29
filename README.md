@@ -1,3 +1,4 @@
 질문
 
-1. return action을 만드는 이유
+1. ShowTodo에서 eachbox checked= true or false가 안됨
+2. react bootstrap에서 alert 사용하기

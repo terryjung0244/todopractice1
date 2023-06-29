@@ -1,13 +1,24 @@
 import React from "react";
 import "./ShowTodo.css";
 import { TodoType } from "model/todo";
-import { useAppSelector } from "service/redux/store";
+import { useAppDispatch, useAppSelector } from "service/redux/store";
+import { sendEachTodoIdAction } from "service/redux/action/todoAction";
 
 const ShowTodo = () => {
-  const { todoList } = useAppSelector((state) => state.todoReducer);
+  const dispatch = useAppDispatch();
+  const { todoList, selectIdList } = useAppSelector(
+    (state) => state.todoReducer
+  );
 
   const allCheckBox = () => {};
-  const eachCheckBox = () => {};
+  const eachCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value) {
+      dispatch(sendEachTodoIdAction(value));
+    }
+  };
+
+  console.log(selectIdList);
 
   return (
     <div className="tableDivMain">
@@ -29,8 +40,9 @@ const ShowTodo = () => {
                   <td>
                     <input
                       type="checkbox"
-                      checked={true}
+                      value={todo.id}
                       onChange={eachCheckBox}
+                      checked={selectIdList.includes(todo.id)}
                     />
                     {todo.id}
                   </td>
