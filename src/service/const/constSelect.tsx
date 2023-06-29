@@ -1,0 +1,5 @@
+export const SELECT_TODO = {
+  SELECT: "SELECT",
+  MARK_AS_DONE: "MARK_AS_DONE",
+  MARK_AS_NOT_DONE: "MARK_AS_NOT_DONE",
+};

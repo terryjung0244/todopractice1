@@ -1,1 +1,5 @@
-export interface TodoReducerState {}
+import { TodoType } from "model/todo";
+
+export interface TodoReducerState {
+  todoList: TodoType[];
+}
