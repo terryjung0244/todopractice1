@@ -18,7 +18,7 @@ const ShowTodo = () => {
     }
   };
 
-  console.log(selectIdList);
+  console.log(todoList);
 
   return (
     <div className="tableDivMain">

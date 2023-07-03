@@ -2,17 +2,20 @@ import { TodoType } from "model/todo";
 import { TODO_CONST_ACTIONS } from "service/const/constAction";
 import {
   CreateTodoActionReturnType,
-  markAsDoneActionReturnType,
+  DeleteTodoActionReturnType,
+  MarkAsDoneActionReturnType,
+  UpdateTodoActionReturnType,
   sendEachTodoIdActionReturnType,
 } from "./todoAction.interface";
-import { SELECT_TODO } from "service/const/constSelect";
 
 const {
   CREATE_TODO_ACTION,
   SEND_EACH_TODO_ID_ACTION,
   SEND_EACH_TODO_ALL_ACTION,
+  UPDATE_TODO_ACTION,
+  DELETE_TODO_ACTION,
+  MARK_AS_DONE_ACTION,
 } = TODO_CONST_ACTIONS;
-const { MARK_AS_DONE, MARK_AS_NOT_DONE } = SELECT_TODO;
 
 export const createTodoAction = (
   newInput: TodoType
@@ -34,9 +37,25 @@ export const sendEachTodoIdAction = (
 
 export const markAsDoneAction = (
   select: boolean
-): markAsDoneActionReturnType => {
+): MarkAsDoneActionReturnType => {
   return {
-    type: MARK_AS_DONE,
-    payload: select,
+    type: MARK_AS_DONE_ACTION,
+    payload: null,
+  };
+};
+
+export const updateTodoAction = (
+  updateInput: Partial<TodoType>
+): UpdateTodoActionReturnType => {
+  return {
+    type: UPDATE_TODO_ACTION,
+    payload: updateInput,
+  };
+};
+
+export const deleteTodoAction = (): DeleteTodoActionReturnType => {
+  return {
+    type: DELETE_TODO_ACTION,
+    payload: null,
   };
 };

@@ -3,10 +3,14 @@ import { TodoReducerState } from "./todoReducer.interface";
 import { TodoActionsType } from "../action/todoAction.interface";
 import { produce } from "immer";
 import { TODO_CONST_ACTIONS } from "service/const/constAction";
-import { SELECT_TODO } from "service/const/constSelect";
+import { TodoType } from "model/todo";
 
-const { CREATE_TODO_ACTION, SEND_EACH_TODO_ID_ACTION } = TODO_CONST_ACTIONS;
-const { MARK_AS_DONE } = SELECT_TODO;
+const {
+  CREATE_TODO_ACTION,
+  SEND_EACH_TODO_ID_ACTION,
+  UPDATE_TODO_ACTION,
+  DELETE_TODO_ACTION,
+} = TODO_CONST_ACTIONS;
 
 const initialState: TodoReducerState = {
   todoList: [],
@@ -29,12 +33,36 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
         if (index === -1) {
           draft.selectIdList.push(action.payload);
         } else {
-          draft.selectIdList.slice(index, 1);
+          draft.selectIdList.splice(index, 1); // ***
         }
         break;
 
-      case MARK_AS_DONE:
+      case UPDATE_TODO_ACTION:
+        const { title, desc, id } = action.payload;
+
+        const updateIndex: number = draft.todoList.findIndex(
+          (todo: TodoType) => todo.id === id
+        );
+        draft.todoList[updateIndex].title = title;
+        draft.todoList[updateIndex].desc = desc;
+        draft.selectIdList = [];
         break;
+
+      case DELETE_TODO_ACTION:
+        const tempTodoList = [...state.todoList];
+        const tempSelectIdList = [...state.selectIdList];
+
+        tempSelectIdList.forEach((id: string) => {
+          let index = tempTodoList.findIndex(
+            (todo: TodoType) => id === todo.id
+          );
+          tempTodoList.splice(index, 1);
+        });
+        return {
+          ...state,
+          todoList: tempTodoList,
+        };
+
       default:
         return state;
     }

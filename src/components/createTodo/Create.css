@@ -10,3 +10,10 @@
   /* border: 2px solid red; */
   margin-right: 10px;
 }
+
+.input-validation-alert {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+}

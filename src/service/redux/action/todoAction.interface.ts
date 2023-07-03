@@ -1,13 +1,14 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { TodoType } from "model/todo";
 import { TODO_CONST_ACTIONS } from "service/const/constAction";
-import { SELECT_TODO } from "service/const/constSelect";
 
-const { MARK_AS_DONE, MARK_AS_NOT_DONE } = SELECT_TODO;
 const {
   CREATE_TODO_ACTION,
   SEND_EACH_TODO_ID_ACTION,
   SEND_EACH_TODO_ALL_ACTION,
+  UPDATE_TODO_ACTION,
+  DELETE_TODO_ACTION,
+  MARK_AS_DONE_ACTION,
 } = TODO_CONST_ACTIONS;
 
 export interface CreateTodoActionReturnType {
@@ -20,13 +21,24 @@ export interface sendEachTodoIdActionReturnType {
   payload: string;
 }
 
-export interface markAsDoneActionReturnType {
-  type: typeof MARK_AS_DONE;
-  payload: boolean;
+export interface UpdateTodoActionReturnType {
+  type: typeof UPDATE_TODO_ACTION;
+  payload: Partial<TodoType>;
+}
+
+export interface DeleteTodoActionReturnType {
+  type: typeof DELETE_TODO_ACTION;
+  payload: null;
+}
+
+export interface MarkAsDoneActionReturnType {
+  type: typeof MARK_AS_DONE_ACTION;
+  payload: null;
 }
 
 export type TodoActionsType =
   | CreateTodoActionReturnType
   | sendEachTodoIdActionReturnType
-  | markAsDoneActionReturnType
+  | UpdateTodoActionReturnType
+  | DeleteTodoActionReturnType
   | AnyAction;
